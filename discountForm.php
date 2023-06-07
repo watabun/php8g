@@ -31,14 +31,27 @@
     ?>
 
     <?php
-        //割引率
-        $discount = 0.8;
+        //セールデータを読み込む
+        require_once("saleData.php");
+        //クーポンコードと商品ID
+        $couponCode = "ha45as";
+        $goodsID = "ax102";
+        //割引率と単価
+        $discount = getCouponRate($couponCode);
+        $tanka = getPrice($goodsID);
+        //割引率と単価に値があるかどうかチェックする
+        if (is_null($discount)||is_null($tanka)){
+            //エラーメッセージを出して、以下のコードを全てキャンセルする
+            $err = '<div class="error">不正な操作がありました。</div>';
+            exit($error);
+        }
+    ?>
+
+    <?php
         $off = (1 - $discount)*100;
         if($discount>0){
             echo "<h2>このページでのご購入は{$off}% OFFになります!<h2>";
         }
-        // 単価の設定
-        $tanka = 2900;
         // ３桁位取り
         $tanka_fmt = number_format($tanka);
     ?>
@@ -46,8 +59,8 @@
     <!-- 入力フォームを作る -->
     <form method="POST" action="discount.php">
         <!-- 隠しフィールドに割引率と単価を設定して POST する -->
-        <input type="hidden" name="discount" value="<?php echo $discount; ?>">
-        <input type="hidden" name="tanka" value="<?php echo $tanka; ?>">
+        <input type="hidden" name="couponCode" value="<?php echo $couponCode; ?>">
+        <input type="hidden" name="goodsId" value="<?php echo $goodsID; ?>">
         <ul>
             <li><label>単価：<?php echo $tanka_fmt; ?>円</label></li>
             <li><label>個数：

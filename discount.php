@@ -23,31 +23,28 @@
 <?php
     // エラーメッセージを入れる配列
     $errors = [];
-    // 割引率の入力値（隠しフィールド）
-    if(isset($_POST['discount'])) {
-        $discount = $_POST['discount'];
-        // 入力値のチェック
-        if (!is_numeric($discount)){
-            $errors[] = "割引率の数値エラー";
-        }
+    // クーポンコード
+    if(isset($_POST['couponCode'])) {
+        $couponCode = $_POST['couponCode'];
+        
     } else{
         // 未設定エラー
-        $errors[] = "割引率が未設定";
+        $couponCode = "";
     }
-    // 単価の入力値（隠しフィールド）
-    if(isset($_POST['tanka'])) {
-        $tanka = $_POST['tanka'];
-        //入力値のチェック
-        if (!ctype_digit($tanka)){
-            // 整数ではないときエラー
-            $errors[] = "単価の数値エラー";
-        }
+    // 商品ID
+    if(isset($_POST['goodsID'])) {
+        $goodsID = $_POST['goodsID'];
     } else {
         //未設定エラー
-        $errors[] = "単価が未設定";
+        $goodsID = "";
     }
 ?>
 
+<?php
+    //セールデータを読み込む
+    require_once("saleData.php");
+    
+?>
 <?php
     //個数の入力値
     if(isset($_POST['kosu'])) {
