@@ -26,7 +26,6 @@
     // クーポンコード
     if(isset($_POST['couponCode'])) {
         $couponCode = $_POST['couponCode'];
-        
     } else{
         // 未設定エラー
         $couponCode = "";
@@ -43,7 +42,16 @@
 <?php
     //セールデータを読み込む
     require_once("saleData.php");
-    
+    // 割引率と単価
+    $discount = getCouponRate($couponCode);
+    $tanka = getPrice($goodsID);
+    //割引率と単価に値があるかどうかチェックする
+    if (is_null($discount)||is_null($tanka)){
+        //エラーメッセージを出して、以下のコードを全てキャンセルする
+        echo $couponCode, ":", $goodsID;
+        $err = '<div class="error">不正な操作がありました。(値があるかどうか)</div>';
+        exit($err);
+    }
 ?>
 <?php
     //個数の入力値

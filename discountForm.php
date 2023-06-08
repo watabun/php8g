@@ -42,7 +42,7 @@
         //割引率と単価に値があるかどうかチェックする
         if (is_null($discount)||is_null($tanka)){
             //エラーメッセージを出して、以下のコードを全てキャンセルする
-            $err = '<div class="error">不正な操作がありました。</div>';
+            $err = '<div class="error">不正な操作がありました。(セールデータ読み込み)</div>';
             exit($error);
         }
     ?>
@@ -60,7 +60,7 @@
     <form method="POST" action="discount.php">
         <!-- 隠しフィールドに割引率と単価を設定して POST する -->
         <input type="hidden" name="couponCode" value="<?php echo $couponCode; ?>">
-        <input type="hidden" name="goodsId" value="<?php echo $goodsID; ?>">
+        <input type="hidden" name="goodsID" value="<?php echo $goodsID; ?>">
         <ul>
             <li><label>単価：<?php echo $tanka_fmt; ?>円</label></li>
             <li><label>個数：
