@@ -49,7 +49,7 @@
                 <input type="text" name="mile" value="<?php echo $mile; ?>">
                 </label>
                 <!-- エラー表示 -->
-                <?php echo $error; ?>
+                //エラーになるため、削除
             </li>
             <li><input type="submit" value="計算する"></li>
         </ul>
