@@ -10,7 +10,9 @@
 <tr><th>商品番号</th><th>商品名</th><th>価格</th></tr>
 <?php
 $pdo = new PDO('mysql:host=localhost;dbname=shop;charset=utf8', 'staff', 'password');
-foreach ($pdo->query('select * from product') as $row) {
+$sql=$pdo->prepare("select * from product where name like ?");
+$sql->execute(['%'.$_REQUEST['keyword'].'%']);
+foreach ($sql as $row) {
     echo '<tr>';
     echo '<td class="id">', htmlspecialchars($row['id']), '</td>';
     echo '<td class="name">', htmlspecialchars($row['name']), '</td>';

@@ -1,0 +1,19 @@
+@charset "utf-8";
+
+table{
+    border-collapse:collapse;
+}
+th,td{
+    border: solid 2px #000000;
+}
+td.id{
+    text-align: right;
+    width: 80px;
+}
+td.name{
+    width: 180px;
+}
+td.price{
+    text-align: right;
+    width: 100px;
+}
